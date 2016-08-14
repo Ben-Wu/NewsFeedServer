@@ -88,6 +88,7 @@ function downloadStoryContent(storyId) {
 
 // populate db with stories from lineup
 function refresh(req, res) {
+    console.log("Refreshing stories");
     request("http://www.cbc.ca/json/cmlink/7.4195", function(err, res2, body) {
         if(err) {
             if(res != null) {
@@ -123,7 +124,9 @@ function refresh(req, res) {
                     })
                 })(parsedStoryArray[i]);
             }
-            res.send("Refreshed");
+            if(res && res != null) {
+                res.send("Refreshed");
+            }
         }
     })
 }
